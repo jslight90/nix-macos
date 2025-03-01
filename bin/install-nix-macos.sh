@@ -11,6 +11,6 @@ fi
 nix --version
 
 architecture=`uname -m`
-nix-shell -p git --run "git clone https://github.com/jslight/nix-macos.git /var/lib/nix-macos"
+nix-shell -p git --run "git clone https://github.com/jslight90/nix-macos.git /var/lib/nix-macos"
 cd /var/lib/nix-macos
 nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake .#$architecture
