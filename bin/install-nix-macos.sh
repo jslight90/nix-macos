@@ -12,4 +12,4 @@ nix --version
 
 nix-shell -p git --run "git clone https://github.com/jslight/nix-macos.git /var/lib/nix-macos"
 cd /var/lib/nix-macos
-nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake darwin#eo
+nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake .#eo
