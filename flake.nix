@@ -35,7 +35,7 @@
       systemd.timers.nix-macos-update = {
         wantedBy = [ "timers.target" ];
         timerConfig = {
-          OnCalendar = "daily";
+          OnCalendar = "weekly";
           Persistent = true;
           Unit = "nix-macos-update.service";
         };
