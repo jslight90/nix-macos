@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 curl -L https://nixos.org/nix/install | sh -s -- --daemon --yes
 
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
@@ -7,3 +9,7 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 
 nix --version
+
+nix-shell -p git --run "git clone https://github.com/jslight/nix-macos.git /var/lib/nix-macos"
+cd /var/lib/nix-macos
+nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake darwin#eo
