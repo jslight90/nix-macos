@@ -28,16 +28,32 @@
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 6;
+    };
 
+    x86_64 = {
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "x86_64-darwin";
+    };
+
+    aarch64 = {
+      # The platform the configuration will be used on.
+      nixpkgs.hostPlatform = "aarch64-darwin";
     };
   in
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#eo
-    darwinConfigurations."eo" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+    darwinConfigurations."x86_64" = nix-darwin.lib.darwinSystem {
+      modules = [
+        configuration
+        x86_64
+      ];
+    };
+
+    darwinConfigurations."aarch64" = nix-darwin.lib.darwinSystem {
+      modules = [
+        configuration
+        aarch64
     };
   };
 }
