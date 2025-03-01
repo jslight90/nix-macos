@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -euxo pipefail
 
 curl -L https://nixos.org/nix/install | sh -s -- --daemon --yes
 

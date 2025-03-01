@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -euxo pipefail
 
 architecture=`uname -m`
 cd /var/lib/nix-macos
