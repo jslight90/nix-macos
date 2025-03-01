@@ -32,22 +32,17 @@
       system.stateVersion = 6;
 
       # Create auto-update service
-      systemd.timers.nix-macos-update = {
-        wantedBy = [ "timers.target" ];
-        timerConfig = {
-          OnCalendar = "weekly";
-          Persistent = true;
-          Unit = "nix-macos-update.service";
-        };
-      };
-      systemd.services.nix-macos-update = {
+      launchd.daemons.nix-macos-update = {
         serviceConfig = {
-          Type = "oneshot";
-          User = "root";
+          StartCalendarInterval = [
+            {
+              Weekday = 0;
+              Hour = 0;
+              Minute = 0;
+            }
+          ];
         };
-        script = ''
-          /var/lib/nix-macos/bin/update-nix-macos.sh
-        '';
+        command = "/var/lib/nix-macos/bin/update-nix-macos.sh";
       };
     };
 
