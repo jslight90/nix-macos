@@ -30,6 +30,25 @@
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 6;
+
+      # Create auto-update service
+      systemd.timers.nix-macos-update = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "daily";
+          Persistent = true;
+          Unit = "nix-macos-update.service";
+        };
+      };
+      systemd.services.nix-macos-update = {
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+        };
+        script = ''
+          /var/lib/nix-macos/bin/update-nix-macos.sh
+        '';
+      };
     };
 
     x86_64 = {
